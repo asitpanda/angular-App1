@@ -19,10 +19,11 @@
           <div class="row featureRow">
             <div class="col-sm-12 featureHeading"><span>Form</span></div>
             <div class="col-sm-12 featureContainer">
+              <form novalidate class="css-form">
                 <div class="row">
                   <div class="col-sm-6">
                     <label>First Name</label>
-                    <input type="text" class="form-control" ng-model="adduserDetail.fName" placeholder="Enter First Name">
+                    <input type="text" class="form-control" ng-minlength="2" ng-maxlength="7" ng-model="adduserDetail.fName" placeholder="Enter First Name">
                   </div>
                    <div class="col-sm-6">
                     <label>Email</label>
@@ -36,7 +37,7 @@
                   </div>
                    <div class="col-sm-6">
                     <label>Nationality</label>
-                    <input type="text" class="form-control" ng-model="adduserDetail.nationality" placeholder="Nationality">
+                    <input type="text" class="form-control" ng-model="adduserDetail.nationality" ng-required="true" placeholder="Nationality">
                    </div>
                 </div>
                 <div class="row" style="margin-top: 10px;">
@@ -48,6 +49,7 @@
                     <button type="submit" class="btn btn-primary" ng-click="addUser()">Add Me</button>
                   </div>
                 </div>
+              </form>
             </div>
           </div>  
         </div>
