@@ -1,16 +1,12 @@
-angular.module('F1FeederApp').
+angular.module('UserProfileApp').
 
-  /* Driver controller */
+  /* User controller */
   controller('userController', function($scope, $routeParams, userService) {
     $scope.id = $routeParams.id;
     $scope.races = [];
-    $scope.driver = null;
+    $scope.user = null;
 
-    userService.getDriverDetails($scope.id).success(function (response) {
-        $scope.driver = response.MRData.StandingsTable.StandingsLists[0].DriverStandings[0]; 
-    });
-
-    userService.getDriverRaces($scope.id).success(function (response) {
-        $scope.races = response.MRData.RaceTable.Races;
+    userService.getUserDetails($scope.id).success(function (response) {
+        $scope.user = response; 
     }); 
   });

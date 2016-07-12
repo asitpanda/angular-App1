@@ -77,3 +77,31 @@ body {
     border-bottom: 0;
   }
 }
+
+div#userListPanel div.row:nth-of-type(even) {
+  background-color: #edf3f9;
+}
+
+.featureHeading {
+    padding: 2px 0px;
+    margin-top: 6px;
+    background-color: #7977ff;
+    font-weight: bold;
+    font-size: medium;
+}
+.featureContainer {
+  padding: 7px;
+}
+
+.featureRow{
+  border:1px solid;border-radius:8px;margin-top: 10px;
+}
+
+.noLeftRightPadding{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.featureHeading span {
+  margin-left: 10px;
+}

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('F1FeederApp')
+angular.module('UserProfileApp')
   .config(function ($routeProvider) {
     $routeProvider
       .when('/userList', {

@@ -1,22 +1,19 @@
-angular.module('F1FeederApp')
-.service('userService', ['$http', function ($http) {
+angular.module('UserProfileApp')
+  .service('userService', userService);
 
-    var ergastAPI = {};
+userService.$inject = ['$http'];
 
-    ergastAPI.getDrivers = function() {
-      return $http.get('api/user'); 
-    }
+function userService($http) {
 
-    ergastAPI.getDriverDetails = function(id) {
-      return $http('api/user/?uid='+ id);
-    }
+  var ergastAPI = {};
 
-    ergastAPI.getDriverRaces = function(id) {
-      return $http({
-        method: 'JSONP', 
-        url: 'http://ergast.com/api/f1/2013/drivers/'+ id +'/results.json?callback=JSON_CALLBACK'
-      });
-    }
+  ergastAPI.getUserList = function () {
+    return $http.get('api/user');
+  }
 
-    return ergastAPI;
-  }]);
+  ergastAPI.getUserDetails = function (id) {
+    return $http('api/user/?uid=' + id);
+  }
+
+  return ergastAPI;
+};
