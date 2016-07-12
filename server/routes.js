@@ -6,12 +6,14 @@
 
 var errors = require('./components/errors');
 var path = require('path');
+var userController = require('./api/user.controller');
 
 module.exports = function(app) {
 
-  // Insert routes below
-  app.use('/api/user', require('./api/user'));
-  
+app.route('/api/user').get(userController.getUserList);
+app.route('/api/user/:uId').get(userController.getUserDetail);
+
+
   // All undefined asset or api routes should return a 404
   app.route('/:url(api|auth|components|app|bower_components|assets)/*')
    .get(errors[404]);

@@ -1,3 +1,5 @@
+'use strict';
+
 angular.module('UserProfileApp')
   .service('userService', userService);
 
@@ -5,15 +7,15 @@ userService.$inject = ['$http'];
 
 function userService($http) {
 
-  var ergastAPI = {};
+  var userServiceApi = {};
 
-  ergastAPI.getUserList = function () {
+  userServiceApi.getUserList = function () {
     return $http.get('api/user');
   }
 
-  ergastAPI.getUserDetails = function (id) {
-    return $http('api/user/?uid=' + id);
+  userServiceApi.getUserDetails = function (uId) {
+    return $http.get('/api/user/' + uId);
   }
 
-  return ergastAPI;
+  return userServiceApi;
 };

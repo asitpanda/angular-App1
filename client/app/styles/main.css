@@ -89,6 +89,9 @@ div#userListPanel div.row:nth-of-type(even) {
     font-weight: bold;
     font-size: medium;
 }
+.tabHeadingText {
+   font-weight: bold;
+}
 .featureContainer {
   padding: 7px;
 }

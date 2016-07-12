@@ -3,55 +3,89 @@
     <div class="col-md-12">
       <div class="row">
         <div class="col-md-12 info">
-          <h3 class="list-title">Available User List</h3>
+          <h3 class="list-title">Angular demo App</h3>
         </div>
       </div>
       <div class="row">
         <div class="col-md-5" style="padding: 10px 24px;">
-          <div class="row featureRow">
-            <div class="col-sm-12 featureHeading"><span>Filter</span></div>
-            <div class="col-sm-12 featureContainer">
-              Filter only country on HTML : <input class="form-control" type="text" ng-model="countryFilter" placeholder="Search Country..." />
-              <br>Filter for multiple column (FirstName,SecondName) on controller: <input class="form-control" type="text" ng-model="nameFilter" placeholder="Search Name..." />
-              <br>Customize filter for address : <input class="form-control" type="text" ng-model="addressFilter" placeholder="Search users between 5-15 range..." />
-            </div>
-          </div> 
-          <div class="row featureRow">
-            <div class="col-sm-12 featureHeading"><span>Form</span></div>
-            <div class="col-sm-12 featureContainer">
-              <form novalidate class="css-form">
-                <div class="row">
-                  <div class="col-sm-6">
-                    <label>First Name</label>
-                    <input type="text" class="form-control" ng-minlength="2" ng-maxlength="7" ng-model="adduserDetail.fName" placeholder="Enter First Name">
+
+          <uib-tabset active="activePill" vertical="true" type="pills">
+            <uib-tab index="0" heading="Filter" class="tabHeadingText">
+              <div class="col-sm-12 featureContainer">
+                Filter only country on HTML : <input class="form-control" type="text" ng-model="countryFilter" placeholder="Search Country..."
+                />
+                <br>Filter for multiple column (FirstName,SecondName) on controller: <input class="form-control" type="text"
+                  ng-model="nameFilter" placeholder="Search Name..." />
+                <br>Customize filter for address : <input class="form-control" type="text" ng-model="addressFilter" placeholder="Search users between 5-15 range..."
+                />
+              </div>
+            </uib-tab>
+            <uib-tab index="1" heading="Form" class="tabHeadingText">
+              <div class="col-sm-12 featureContainer">
+                <form novalidate class="css-form">
+                  <div class="row">
+                    <div class="col-sm-6">
+                      <label>First Name</label>
+                      <input type="text" class="form-control" ng-minlength="2" ng-maxlength="7" ng-model="adduserDetail.fName" placeholder="Enter First Name">
+                    </div>
+                    <div class="col-sm-6">
+                      <label>Email</label>
+                      <input type="email" class="form-control" ng-model="adduserDetail.email" placeholder="name@example.com">
+                    </div>
                   </div>
-                   <div class="col-sm-6">
-                    <label>Email</label>
-                    <input type="email" class="form-control" ng-model="adduserDetail.email" placeholder="name@example.com">
-                   </div>
-                </div>
-                <div class="row" style="margin-top: 10px;">
-                  <div class="col-sm-6">
-                    <label>Last Name</label>
-                    <input type="text" class="form-control" ng-model="adduserDetail.lName" placeholder="Enter Last Name">
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-6">
+                      <label>Last Name</label>
+                      <input type="text" class="form-control" ng-model="adduserDetail.lName" placeholder="Enter Last Name">
+                    </div>
+                    <div class="col-sm-6">
+                      <label>Nationality</label>
+                      <input type="text" class="form-control" ng-model="adduserDetail.nationality" ng-required="true" placeholder="Nationality"
+                        uib-typeahead="country for country in countryName | filter:$viewValue | limitTo:8">
+                    </div>
                   </div>
-                   <div class="col-sm-6">
-                    <label>Nationality</label>
-                    <input type="text" class="form-control" ng-model="adduserDetail.nationality" ng-required="true" placeholder="Nationality">
-                   </div>
-                </div>
-                <div class="row" style="margin-top: 10px;">
-                  <div class="col-sm-6">
-                    <label>Date Of birth</label>
-                    <input type="date" class="form-control" ng-model="adduserDetail.dob" placeholder="YYYY-MM-DD">
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-6">
+                      <label>Date Of birth</label>
+                      <input type="date" class="form-control" ng-model="adduserDetail.dob" placeholder="YYYY-MM-DD">
+                    </div>
+                    <div class="col-sm-6">
+                      <label>Address</label>
+                      <input type="text" class="form-control" ng-model="adduserDetail.address" placeholder="Enter address">
+                    </div>
                   </div>
-                  <div class="col-sm-6" style="margin: -6% 70%;">
-                    <button type="submit" class="btn btn-primary" ng-click="addUser()">Add Me</button>
+                  <div class="row" style="margin-top: 10px;">
+                    <div class="col-sm-6" style="margin:auto 80%;">
+                      <button type="submit" class="btn btn-primary" ng-click="addUser()">Add Me</button>
+                    </div>
                   </div>
-                </div>
-              </form>
-            </div>
-          </div>  
+                </form>
+              </div>
+            </uib-tab>
+            <uib-tab index="2" heading="Directive" class="tabHeadingText">
+              <div class="col-sm-12 featureContainer">
+                Predefined directive : <br>
+                <form class="form-horizontal">
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">Tooltip directive - </label>
+                    <div class="col-sm-8">
+                      <button tooltip-placement="right" uib-tooltip="More details - https://angular-ui.github.io/bootstrap/#/tooltip " type="button"
+                        class="btn btn-default">Hover me to see changes</button>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="col-sm-4 control-label">Typehead directive - </label>
+                    <div class="col-sm-8">
+                      <input type="text" ng-model="selected" uib-typeahead="country for country in countryName | filter:$viewValue | limitTo:8"
+                        class="form-control" placeholder="Start typing here...">
+                    </div>
+                  </div>
+                </form>
+                <br>customize directive: <input class="form-control" type="text" ng-model="nameFilter" placeholder="Search Name..."
+                />
+              </div>
+            </uib-tab>
+          </uib-tabset>
         </div>
         <div class="col-md-7" id="userListPanel" style="border: 2px solid #676d71;border-radius: 12px;">
           <div style="display:flex;justify-content: space-between;">

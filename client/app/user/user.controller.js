@@ -1,12 +1,9 @@
-angular.module('UserProfileApp').
+'use strict';
 
-  /* User controller */
-  controller('userController', function($scope, $routeParams, userService) {
-    $scope.id = $routeParams.id;
-    $scope.races = [];
-    $scope.user = null;
+angular.module('UserProfileApp').controller('userController', userController);
 
-    userService.getUserDetails($scope.id).success(function (response) {
-        $scope.user = response; 
-    }); 
-  });
+userController.$inject = ['$scope', 'userdetail'];
+
+function userController($scope, userdetail) {
+  $scope.user = userdetail.data;
+};
