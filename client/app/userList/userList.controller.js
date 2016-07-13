@@ -2,9 +2,9 @@
 
 angular.module('UserProfileApp').controller('UserListCtrl', UserListCtrl);
 
-UserListCtrl.$inject = ['$scope', 'userService', '$uibModal'];
+UserListCtrl.$inject = ['$scope', 'userService', '$uibModal','$compile'];
 
-function UserListCtrl($scope, userService, $uibModal) {
+function UserListCtrl($scope, userService, $uibModal, $compile) {
   $scope.nameFilter = null;
   $scope.addressFilter = '';
   $scope.userList = [];
@@ -42,6 +42,16 @@ function UserListCtrl($scope, userService, $uibModal) {
           return userService.getUserDetails(selectedUser.userId);
         }
       }
+    });
+  }
+
+  $scope.getUserProfile = function(uid) {
+    var userId = uid || 5;
+    userService.getUserDetails(userId).then(function(response){
+        $scope.userData = response.data;
+        var compiledDirective = $compile('<user-profile user-object="userData"></user-profile>');
+        var directiveElement = compiledDirective($scope);
+        $('#dynamicUserContent').empty().append(directiveElement);
     });
   }
 };

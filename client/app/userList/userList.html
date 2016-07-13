@@ -81,8 +81,9 @@
                     </div>
                   </div>
                 </form>
-                <br>customize directive: <input class="form-control" type="text" ng-model="nameFilter" placeholder="Search Name..."
-                />
+                <br>customize directive: <br>
+                Enter a number between 1-23 to get user details <input type="text" ng-model="enteredUserId"> 
+                Click show button to get profile <button ng-click="getUserProfile(enteredUserId)">Show Profile</button><div id="dynamicUserContent"></div>
               </div>
             </uib-tab>
           </uib-tabset>
