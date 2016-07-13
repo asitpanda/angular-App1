@@ -8,17 +8,16 @@
       </div>
       <div class="row">
         <div class="col-md-5" style="padding: 10px 24px;">
-
           <uib-tabset active="activePill" vertical="true" type="pills">
             <uib-tab index="0" heading="Filter" class="tabHeadingText">
               <div class="col-sm-12 featureContainer">
-                Filter only country on HTML : <input class="form-control" type="text" ng-model="countryFilter" placeholder="Search Country..."
+                Filter only country on HTML : <input class="form-control" type="text" ng-model="model.countryFilter" placeholder="Search Country..."
                 />
                 <br>Filter for multiple column (FirstName,SecondName) on controller: <input class="form-control" type="text"
-                  ng-model="nameFilter" placeholder="Search Name..." />
-                <br>Customize filter for address : <input class="form-control" type="text" ng-model="addressFilter" placeholder="Search users between 5-15 range..."
+                  ng-model="model.nameFilter" placeholder="Search Name..." />
+                <br>Customize filter for address : <input class="form-control" type="text" ng-model="model.addressFilter" placeholder="Search users between 5-15 range..."
                 />
-              </div>
+              </div>{{model.countryFilter}}
             </uib-tab>
             <uib-tab index="1" heading="Form" class="tabHeadingText">
               <div class="col-sm-12 featureContainer">
@@ -26,32 +25,32 @@
                   <div class="row">
                     <div class="col-sm-6">
                       <label>First Name</label>
-                      <input type="text" class="form-control" ng-minlength="2" ng-maxlength="7" ng-model="adduserDetail.fName" placeholder="Enter First Name">
+                      <input type="text" class="form-control" ng-minlength="2" ng-maxlength="7" ng-model="model.adduserDetail.fName" placeholder="Enter First Name">
                     </div>
                     <div class="col-sm-6">
                       <label>Email</label>
-                      <input type="email" class="form-control" ng-model="adduserDetail.email" placeholder="name@example.com">
+                      <input type="email" class="form-control" ng-model="model.adduserDetail.email" placeholder="name@example.com">
                     </div>
                   </div>
                   <div class="row" style="margin-top: 10px;">
                     <div class="col-sm-6">
                       <label>Last Name</label>
-                      <input type="text" class="form-control" ng-model="adduserDetail.lName" placeholder="Enter Last Name">
+                      <input type="text" class="form-control" ng-model="model.adduserDetail.lName" placeholder="Enter Last Name">
                     </div>
                     <div class="col-sm-6">
                       <label>Nationality</label>
-                      <input type="text" class="form-control" ng-model="adduserDetail.nationality" ng-required="true" placeholder="Nationality"
+                      <input type="text" class="form-control" ng-model="model.adduserDetail.nationality" ng-required="true" placeholder="Nationality"
                         uib-typeahead="country for country in countryName | filter:$viewValue | limitTo:8">
                     </div>
                   </div>
                   <div class="row" style="margin-top: 10px;">
                     <div class="col-sm-6">
                       <label>Date Of birth</label>
-                      <input type="date" class="form-control" ng-model="adduserDetail.dob" placeholder="YYYY-MM-DD">
+                      <input type="date" class="form-control" ng-model="model.adduserDetail.dob" placeholder="YYYY-MM-DD">
                     </div>
                     <div class="col-sm-6">
                       <label>Address</label>
-                      <input type="text" class="form-control" ng-model="adduserDetail.address" placeholder="Enter address">
+                      <input type="text" class="form-control" ng-model="model.adduserDetail.address" placeholder="Enter address">
                     </div>
                   </div>
                   <div class="row" style="margin-top: 10px;">
@@ -87,7 +86,7 @@
               </div>
             </uib-tab>
           </uib-tabset>
-        </div>
+        </div>{{model.countryFilter}}aaas
         <div class="col-md-7" id="userListPanel" style="border: 2px solid #676d71;border-radius: 12px;">
           <div style="display:flex;justify-content: space-between;">
             <div>Number</div>
@@ -95,7 +94,7 @@
             <div>Country</div>
             <div>Address</div>
           </div>
-          <div class="row" ng-repeat="user in userList | filter: {nationality:countryFilter} | filter:searchFilter | filter:(addressFilter ? searchAddress :'')">
+          <div class="row" ng-repeat="user in model.userList | filter: {nationality:model.countryFilter} | filter:searchFilter | filter:(model.addressFilter ? searchAddress :'')">
             <div class="col-sm-2">{{user.userId}}</div>
             <div class="col-sm-5">
               <img src="images/flags/{{user.nationality}}.png" />
