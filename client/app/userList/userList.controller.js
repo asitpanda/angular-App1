@@ -9,7 +9,8 @@ function UserListCtrl($scope, userService, $uibModal, $compile) {
     nameFilter : null,
     addressFilter : '',
     userList : [],
-    adduserDetail : {}
+    adduserDetail : {},
+    showAlert : false
   }
 
   $scope.searchFilter = function (user) {
@@ -20,19 +21,30 @@ function UserListCtrl($scope, userService, $uibModal, $compile) {
   $scope.countryName = ['Abkhazia', 'Afghanistan', 'Aland', 'Albania', 'Algeria', 'American-Samoa', 'Andorra', 'Angola', 'Anguilla', 'Antarctica', 'Antigua-and-Barbuda', 'Argentina', 'Armenia', 'Aruba', 'Australia', 'Australian', 'Austria', 'Austrian', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Basque-Country', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bermuda', 'Bhutan', 'Bolivia', 'Bosnia-and-Herzegovina', 'Botswana', 'Brazil', 'Brazilian', 'British', 'British-Antarctic-Territory', 'British-Virgin-Islands', 'Brunei', 'Bulgaria', 'Burkina-Faso', 'Burundi', 'Cambodia', 'Canada', 'Canary-Islands', 'Central-African-Republic', 'Chad', 'Chile', 'China', 'Christmas-Island', 'Cocos-Keeling-Islands', 'Colombia', 'Commonwealth', 'Comoros', 'Cook-Islands', 'Costa-Rica', 'Cote-dIvoire', 'Croatia', 'Cuba', 'Curacao', 'Cyprus', 'Czech-Republic', 'Democratic-Republic-of-the-Congo', 'Denmark', 'Djibouti', 'Dominica', 'Dominican-Republic', 'Dutch', 'East-Timor', 'Ecuador', 'Egypt', 'El-Salvador', 'England', 'English', 'Equatorial-Guinea', 'Eritrea', 'Estonia', 'Ethiopia', 'European-Union', 'Falkland-Islands', 'Faroes', 'Fiji', 'Finland', 'Finnish', 'France', 'French', 'French-Polynesia', 'French-Southern-Territories', 'Gabon', 'Gambia', 'Georgia', 'German', 'Germany', 'Ghana', 'Gibraltar', 'GoSquared', 'Greece', 'Poland']
 
   $scope.addUser = function () {
+    if(_.isEmpty(model.adduserDetail)) {
+      model.showAlert = true;
+      return;
+    } 
+    
     model.adduserDetail.userId = model.userList.length + 1;
     var date = new Date(model.adduserDetail.dob);
     model.adduserDetail.dob = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-    model.userList.push(model.adduserDetail);
+    model.userList = _.cloneDeep(model.userList);
+    model.userList.push(_.cloneDeep(model.adduserDetail));
+    model.showAlert = false;
   }
+
+$scope.closeAlert = function(alertType){
+  model.showAlert = false;
+}
 
   $scope.searchAddress = function (user) {
     if (!_.include(user.address.toLowerCase(), model.addressFilter.toLowerCase())) return false;
     if (user.userId >= 5 && user.userId <= 15) return true;
   }
 
-  userService.getUserList().success(function (response) {
-    model.userList = response;
+  userService.getUserList().then(function (response) {
+    model.userList = response.data;
   });
 
   $scope.getUserDetails = function (selectedUser) {

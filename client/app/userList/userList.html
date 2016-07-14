@@ -8,8 +8,8 @@
       </div>
       <div class="row">
         <div class="col-md-5" style="padding: 10px 24px;">
-          <uib-tabset active="activePill" vertical="true" type="pills">
-            <uib-tab index="0" heading="Filter" class="tabHeadingText">
+          <uib-accordion>
+            <uib-accordion-group is-open='true' heading="Filter" panel-class="panel panel-primary">
               <div class="col-sm-12 featureContainer">
                 Filter only country on HTML : <input class="form-control" type="text" ng-model="model.countryFilter" placeholder="Search Country..."
                 />
@@ -17,11 +17,15 @@
                   ng-model="model.nameFilter" placeholder="Search Name..." />
                 <br>Customize filter for address : <input class="form-control" type="text" ng-model="model.addressFilter" placeholder="Search users between 5-15 range..."
                 />
+                <br>
+                Angular filter
+                <input type="number" ng-model="model.currencyValue" placeholder="Enter any number"> {{model.currencyValue | userCurrency:"&#8377;"}}
               </div>
-            </uib-tab>
-            <uib-tab index="1" heading="Form" class="tabHeadingText">
+            </uib-accordion-group>
+            <uib-accordion-group heading="Form" panel-class="panel panel-primary">
               <div class="col-sm-12 featureContainer">
-                <form novalidate class="css-form">
+                <form name="userForm" novalidate class="css-form">
+                  <uib-alert ng-show="userForm.$invalid && userForm.$submitted && model.showAlert" type="danger" dismiss-on-timeout="10" close="closeAlert('danger')">Form values can't be empty</uib-alert>
                   <div class="row">
                     <div class="col-sm-6">
                       <label>First Name</label>
@@ -39,14 +43,14 @@
                     </div>
                     <div class="col-sm-6">
                       <label>Nationality</label>
-                      <input type="text" class="form-control" ng-model="model.adduserDetail.nationality" ng-required="true" placeholder="Nationality"
+                      <input type="text" class="form-control" name="nationality" ng-model="model.adduserDetail.nationality" ng-required="true" placeholder="Nationality"
                         uib-typeahead="country for country in countryName | filter:$viewValue | limitTo:8">
                     </div>
                   </div>
                   <div class="row" style="margin-top: 10px;">
                     <div class="col-sm-6">
                       <label>Date Of birth</label>
-                      <input type="date" class="form-control" ng-model="model.adduserDetail.dob" placeholder="YYYY-MM-DD">
+                      <input type="date" class="form-control" name="dob" ng-model="model.adduserDetail.dob" ng-required="true" placeholder="YYYY-MM-DD">
                     </div>
                     <div class="col-sm-6">
                       <label>Address</label>
@@ -60,32 +64,32 @@
                   </div>
                 </form>
               </div>
-            </uib-tab>
-            <uib-tab index="2" heading="Directive" class="tabHeadingText">
+            </uib-accordion-group>
+            <uib-accordion-group heading="Directive" panel-class="panel panel-primary">
               <div class="col-sm-12 featureContainer">
                 Predefined directive : <br>
                 <form class="form-horizontal">
                   <div class="form-group">
-                    <label class="col-sm-4 control-label">Tooltip directive - </label>
-                    <div class="col-sm-8">
+                    <label class="col-sm-5 control-label">Tooltip directive - </label>
+                    <div class="col-sm-7">
                       <button tooltip-placement="right" uib-tooltip="More details - https://angular-ui.github.io/bootstrap/#/tooltip " type="button"
                         class="btn btn-default">Hover me to see changes</button>
                     </div>
                   </div>
                   <div class="form-group">
-                    <label class="col-sm-4 control-label">Typehead directive - </label>
-                    <div class="col-sm-8">
+                    <label class="col-sm-5 control-label">Typehead directive - </label>
+                    <div class="col-sm-7">
                       <input type="text" ng-model="selected" uib-typeahead="country for country in countryName | filter:$viewValue | limitTo:8"
                         class="form-control" placeholder="Start typing here...">
                     </div>
                   </div>
                 </form>
-                <br>customize directive: <br>
-                Enter a number between 1-23 to get user details <input type="text" ng-model="enteredUserId"> 
+                <br>Customize directive: <br>
+                Enter a number between 1-23 to get user details <input type="text" ng-model="enteredUserId" style="width:100px;"> <br>
                 Click show button to get profile <button ng-click="getUserProfile(enteredUserId)">Show Profile</button><div id="dynamicUserContent"></div>
               </div>
-            </uib-tab>
-          </uib-tabset>
+            </uib-accordion-group>
+          </uib-accordion>
         </div>
         <div class="col-md-7" id="userListPanel" style="border: 2px solid #676d71;border-radius: 12px;">
           <div style="display:flex;justify-content: space-between;">
@@ -94,7 +98,7 @@
             <div>Country</div>
             <div>Address</div>
           </div>
-          <div class="row" ng-repeat="user in model.userList | filter: {nationality:model.countryFilter} | filter:searchFilter | filter:(model.addressFilter ? searchAddress :'')">
+          <div class="row" ng-repeat="user in model.userList | orderBy:'-userId' | filter: {nationality:model.countryFilter} | filter:searchFilter | filter:(model.addressFilter ? searchAddress :'')">
             <div class="col-sm-2">{{user.userId}}</div>
             <div class="col-sm-5">
               <img src="images/flags/{{user.nationality}}.png" />
