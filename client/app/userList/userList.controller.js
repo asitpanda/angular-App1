@@ -48,7 +48,7 @@ $scope.closeAlert = function(alertType){
   });
 
   $scope.getUserDetails = function (selectedUser) {
-    modalInstance = $uibModal.open({
+  var modalInstance = $uibModal.open({
       templateUrl: 'app/user/user.html',
       controller: 'userController',
       resolve: {

@@ -1,7 +1,85 @@
-<div class="driver-status">
-  Country: {{user.nationality}} <br/> First Name: {{user.fName}}<br/> Last Name: {{user.lName}}<br/> Birth: {{user.dob}}<br/>
-  <a href="{{user.url}}" target="_blank">Biography</a>
-
-
-  <img src="images/flags/big/{{user.nationality}}.png" />
+<div ng-if="!model.show" style="padding: 20px;">
+    <div class="row">
+       <i ng-show="!model.editModeActive" ng-click="toggleEditMode()" class="fa fa-pencil pointer"></i> 
+       <i ng-show="model.editModeActive" ng-click="toggleEditMode()" class="fa fa-times pointer"></i>
+       <i ng-show="model.editModeActive" ng-click="toggleEditMode()" class="fa fa-floppy-o pointer"></i>  
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <img src="images/flags/big/{{user.nationality}}.png" />
+      </div>
+      <div class="col-sm-6">
+        <span>First Name: {{user.fName}}</span>
+        <span>Last Name: {{user.lName}}</span>
+      </div>
+    </div> 
+    <div class="row">
+      <div class="col-sm-6">
+        <span>Country: {{user.nationality}}</span>
+      </div>
+      <div class="col-sm-6">
+        <span>Birth: {{user.dob}}</span>
+      </div>
+    </div> 
+    <div class="row">
+      <div class="col-sm-6">
+        <span>Email: {{user.email}}</span>
+      </div>
+      <div class="col-sm-6">
+        <span>Nationality: {{user.nationality}}</span>
+      </div>
+    </div> 
+    <div class="row">
+      <div class="col-sm-6">
+        <span>Address: {{user.address}}</span>
+      </div>
+      <div class="col-sm-6">
+        <span>Biography: {{user.url}}</span>
+      </div>
+    </div>  
+</div>
+<div ng-if="model.edit" style="padding: 20px;">
+  <form name="userForm" novalidate class="css-form">
+    <uib-alert ng-show="userForm.$invalid && userForm.$submitted && model.showAlert" type="danger" dismiss-on-timeout="10" close="closeAlert('danger')">Form values can't be empty</uib-alert>
+    <div class="row">
+      <div class="col-sm-6">
+        <label>First Name</label>
+        <input type="text" class="form-control" ng-minlength="2" ng-maxlength="7" ng-model="user.fName" placeholder="Enter First Name">
+      </div>
+      <div class="col-sm-6">
+        <label>Email</label>
+        <input type="email" class="form-control" ng-model="user.email" placeholder="name@example.com">
+      </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+      <div class="col-sm-6">
+        <label>Last Name</label>
+        <input type="text" class="form-control" ng-model="user.lName" placeholder="Enter Last Name">
+      </div>
+      <div class="col-sm-6">
+        <label>Nationality</label>
+        <input type="text" class="form-control" name="nationality" ng-model="user.nationality" ng-required="true" placeholder="Nationality"
+          uib-typeahead="country for country in countryName | filter:$viewValue | limitTo:8">
+      </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+      <div class="col-sm-6">
+        <label>Date Of birth</label>
+        <input type="date" class="form-control" name="dob" ng-model="user.dob" ng-required="true" placeholder="YYYY-MM-DD">
+      </div>
+      <div class="col-sm-6">
+        <label>Address</label>
+        <input type="text" class="form-control" ng-model="user.address" placeholder="Enter address">
+      </div>
+    </div>
+    <div class="row" style="margin-top: 10px;">
+      <div class="col-sm-6">
+        <label>Biography</label>
+        <a href="{{user.url}}" target="_blank">Biography</a>
+      </div>
+      <div class="col-sm-6">
+        <img src="images/flags/big/{{user.nationality}}.png" />
+      </div>
+    </div>
+  </form>
 </div>

@@ -9,17 +9,46 @@
       <div class="row">
         <div class="col-md-5" style="padding: 10px 24px;">
           <uib-accordion>
+            <uib-accordion-group is-open='true' heading="Basic Features" panel-class="panel panel-primary">
+              <div class="col-sm-12 featureContainer">
+                <label>ng-show and ng-hide :</label> Click me: <input type="checkbox" ng-model="checked"><br/>
+                <div>
+                  <label>Show:</label>
+                  <span ng-show="checked">
+                    I show up when your checkbox is checked.
+                  </span>
+                </div>
+                <div>
+                  <label>Hide:</label>
+                  <span ng-hide="checked">
+                    I hide when your checkbox is checked.
+                  </span>
+                </div>
+                <hr>
+                <label>ng-if:</label> Click me: <input type="checkbox" ng-model="checkedif" ng-init="checkedif=true" /><br/>
+                <label>Show when checked:</label>
+                <span ng-if="checkedif">
+                  This is removed when the checkbox is unchecked.
+                </span>
+                <hr>
+                <label>Two way binding</label><br>
+                <p>Current a number : <input type="number" ng-model="bid" ng-init="bid =75" /><span style="margin-left:10px;">${{bid}}</span </p>
+                <hr>
+                <label>Expression</label> <br>
+                <span> Expression written inside two curly braces : {{bid | currency:'&#8377;' }}</span><br>
+                <span> Expression with ng-bind : <span ng-bind="bid | currency:'&#8364;'"></span></span>
+              </div>
+            </uib-accordion-group>
             <uib-accordion-group is-open='true' heading="Filter" panel-class="panel panel-primary">
               <div class="col-sm-12 featureContainer">
                 Filter only country on HTML : <input class="form-control" type="text" ng-model="model.countryFilter" placeholder="Search Country..."
                 />
                 <br>Filter for multiple column (FirstName,SecondName) on controller: <input class="form-control" type="text"
                   ng-model="model.nameFilter" placeholder="Search Name..." />
-                <br>Customize filter for address : <input class="form-control" type="text" ng-model="model.addressFilter" placeholder="Search users between 5-15 range..."
-                />
-                <br>
-                Angular filter
-                <input type="number" ng-model="model.currencyValue" placeholder="Enter any number"> {{model.currencyValue | userCurrency:"&#8377;"}}
+                <br>Customize filter for address : <input class="form-control" type="text" ng-model="model.addressFilter"
+                  placeholder="Search users between 5-15 range..." />
+                <br> Angular filter
+                <input type="number" style="width:50%" ng-model="model.currencyValue" placeholder="Enter above four digit number">                {{model.currencyValue | userCurrency}}
               </div>
             </uib-accordion-group>
             <uib-accordion-group heading="Form" panel-class="panel panel-primary">
@@ -43,8 +72,8 @@
                     </div>
                     <div class="col-sm-6">
                       <label>Nationality</label>
-                      <input type="text" class="form-control" name="nationality" ng-model="model.adduserDetail.nationality" ng-required="true" placeholder="Nationality"
-                        uib-typeahead="country for country in countryName | filter:$viewValue | limitTo:8">
+                      <input type="text" class="form-control" name="nationality" ng-model="model.adduserDetail.nationality" ng-required="true"
+                        placeholder="Nationality" uib-typeahead="country for country in countryName | filter:$viewValue | limitTo:8">
                     </div>
                   </div>
                   <div class="row" style="margin-top: 10px;">
@@ -72,7 +101,7 @@
                   <div class="form-group">
                     <label class="col-sm-5 control-label">Tooltip directive - </label>
                     <div class="col-sm-7">
-                      <button tooltip-placement="right" uib-tooltip="More details - https://angular-ui.github.io/bootstrap/#/tooltip " type="button"
+                      <button tooltip-placement="top" uib-tooltip="More details - https://angular-ui.github.io/bootstrap/#/tooltip " type="button"
                         class="btn btn-default">Hover me to see changes</button>
                     </div>
                   </div>
@@ -84,9 +113,9 @@
                     </div>
                   </div>
                 </form>
-                <br>Customize directive: <br>
-                Enter a number between 1-23 to get user details <input type="text" ng-model="enteredUserId" style="width:100px;"> <br>
-                Click show button to get profile <button ng-click="getUserProfile(enteredUserId)">Show Profile</button><div id="dynamicUserContent"></div>
+                <br>Customize directive: <br> Enter a number between 01-23 to get user details <input type="text" ng-model="enteredUserId"
+                  style="width:100px;"> <br> Click show button to get profile <button ng-click="getUserProfile(enteredUserId)">Show Profile</button>
+                <div id="dynamicUserContent"></div>
               </div>
             </uib-accordion-group>
           </uib-accordion>
