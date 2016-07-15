@@ -27,8 +27,6 @@ function UserListCtrl($scope, userService, $uibModal, $compile, $rootScope) {
     } 
     
     model.adduserDetail.userId = model.userList.length + 1;
-    var date = new Date(model.adduserDetail.dob);
-    model.adduserDetail.dob = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
     model.userList = _.cloneDeep(model.userList);
     model.userList.push(_.cloneDeep(model.adduserDetail));
     model.showAlert = false;
@@ -44,6 +42,9 @@ $scope.closeAlert = function(alertType){
   }
 
   userService.getUserList().then(function (response) {
+    _.map(response.data,function(user){
+      user.dob = new Date(user.dob);
+    });
     model.userList = response.data;
   });
 
@@ -69,8 +70,7 @@ $scope.closeAlert = function(alertType){
     });
   }
 
-  var userDataChangedListner = $rootScope.$on('userDataChanged',function(event,response){
-    var changedUserData = _.cloneDeep(response);
+  var userDataChangedListner = $rootScope.$on('userDataChanged',function(event,changedUserData){
     var userIndex = _.findIndex(model.userList,function(user){
                       return changedUserData.userId === user.userId;
                     });
@@ -78,4 +78,8 @@ $scope.closeAlert = function(alertType){
   });
 
   $scope.model = model;
+
+  $scope.$on('$destroy', function () {
+    userDataChangedListner();
+  });
 };

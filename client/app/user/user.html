@@ -1,4 +1,5 @@
-<div class="row" style="padding: 5px 30px;margin: auto 87%;display: flex;">
+<div>
+<div ng-if="showUpdateAction" class="row" style="padding: 5px 30px;margin: auto 87%;display: flex;">
   <i ng-show="!model.editModeActive" ng-click="toggleEditMode()" class="fa fa-pencil pointer"></i>
   <i ng-show="model.editModeActive" ng-click="toggleEditMode()" class="fa fa-times pointer"></i>
   <i style="margin-left:5px;" ng-show="model.editModeActive" ng-click="saveUserDetails()" class="fa fa-floppy-o pointer"></i>
@@ -18,7 +19,7 @@
       <span>Country: {{user.nationality}}</span>
     </div>
     <div class="col-sm-6">
-      <span>Birth: {{user.dob}}</span>
+      <span>Birth: {{user.dob|date:"MM/dd/yyyy"}}</span>
     </div>
   </div>
   <div class="row">
@@ -82,4 +83,5 @@
       </div>
     </div>
   </form>
+</div>
 </div>

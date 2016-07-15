@@ -14,4 +14,5 @@ userProfileCtrl.$inject = ['$scope', '$rootScope'];
 
 function userProfileCtrl($scope, $rootScope) {
    $scope.user = $scope.userObject;
+   $scope.showUpdateAction = false;
 };
