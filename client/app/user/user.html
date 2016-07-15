@@ -1,44 +1,44 @@
-<div ng-if="!model.show" style="padding: 20px;">
-    <div class="row">
-       <i ng-show="!model.editModeActive" ng-click="toggleEditMode()" class="fa fa-pencil pointer"></i> 
-       <i ng-show="model.editModeActive" ng-click="toggleEditMode()" class="fa fa-times pointer"></i>
-       <i ng-show="model.editModeActive" ng-click="toggleEditMode()" class="fa fa-floppy-o pointer"></i>  
-    </div>
-    <div class="row">
-      <div class="col-sm-6">
-        <img src="images/flags/big/{{user.nationality}}.png" />
-      </div>
-      <div class="col-sm-6">
-        <span>First Name: {{user.fName}}</span>
-        <span>Last Name: {{user.lName}}</span>
-      </div>
-    </div> 
-    <div class="row">
-      <div class="col-sm-6">
-        <span>Country: {{user.nationality}}</span>
-      </div>
-      <div class="col-sm-6">
-        <span>Birth: {{user.dob}}</span>
-      </div>
-    </div> 
-    <div class="row">
-      <div class="col-sm-6">
-        <span>Email: {{user.email}}</span>
-      </div>
-      <div class="col-sm-6">
-        <span>Nationality: {{user.nationality}}</span>
-      </div>
-    </div> 
-    <div class="row">
-      <div class="col-sm-6">
-        <span>Address: {{user.address}}</span>
-      </div>
-      <div class="col-sm-6">
-        <span>Biography: {{user.url}}</span>
-      </div>
-    </div>  
+<div class="row" style="padding: 5px 30px;margin: auto 87%;display: flex;">
+  <i ng-show="!model.editModeActive" ng-click="toggleEditMode()" class="fa fa-pencil pointer"></i>
+  <i ng-show="model.editModeActive" ng-click="toggleEditMode()" class="fa fa-times pointer"></i>
+  <i style="margin-left:5px;" ng-show="model.editModeActive" ng-click="saveUserDetails()" class="fa fa-floppy-o pointer"></i>
 </div>
-<div ng-if="model.edit" style="padding: 20px;">
+<div ng-if="!model.editModeActive" style="padding:5px 20px 20px">
+  <div class="row">
+    <div class="col-sm-6">
+      <img src="images/flags/big/{{user.nationality}}.png" />
+    </div>
+    <div class="col-sm-6" style="display:flex;flex-direction: column;">
+      <span>First Name: {{user.fName}}</span>
+      <span>Last Name: {{user.lName}}</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <span>Country: {{user.nationality}}</span>
+    </div>
+    <div class="col-sm-6">
+      <span>Birth: {{user.dob}}</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <span>Email: {{user.email}}</span>
+    </div>
+    <div class="col-sm-6">
+      <span>Nationality: {{user.nationality}}</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      <span>Address: {{user.address}}</span>
+    </div>
+    <div class="col-sm-6">
+      <span>Biography: {{user.url}}</span>
+    </div>
+  </div>
+</div>
+<div ng-if="model.editModeActive" style="padding:5px 20px 20px">
   <form name="userForm" novalidate class="css-form">
     <uib-alert ng-show="userForm.$invalid && userForm.$submitted && model.showAlert" type="danger" dismiss-on-timeout="10" close="closeAlert('danger')">Form values can't be empty</uib-alert>
     <div class="row">

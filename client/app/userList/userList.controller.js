@@ -2,9 +2,9 @@
 
 angular.module('UserProfileApp').controller('UserListCtrl', UserListCtrl);
 
-UserListCtrl.$inject = ['$scope', 'userService', '$uibModal','$compile'];
+UserListCtrl.$inject = ['$scope', 'userService', '$uibModal','$compile', '$rootScope'];
 
-function UserListCtrl($scope, userService, $uibModal, $compile) {
+function UserListCtrl($scope, userService, $uibModal, $compile, $rootScope) {
    var model = {
     nameFilter : null,
     addressFilter : '',
@@ -68,6 +68,14 @@ $scope.closeAlert = function(alertType){
         $('#dynamicUserContent').empty().append(directiveElement);
     });
   }
+
+  var userDataChangedListner = $rootScope.$on('userDataChanged',function(event,response){
+    var changedUserData = _.cloneDeep(response);
+    var userIndex = _.findIndex(model.userList,function(user){
+                      return changedUserData.userId === user.userId;
+                    });
+    model.userList[userIndex] = changedUserData;
+  });
 
   $scope.model = model;
 };
