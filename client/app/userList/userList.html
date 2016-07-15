@@ -32,7 +32,7 @@
                 </span>
                 <hr>
                 <label>Two way binding</label><br>
-                <p>Current a number : <input type="number" ng-model="bid" ng-init="bid =75" /><span style="margin-left:10px;">${{bid}}</span </p>
+                <p>Enter a number : <input type="number" ng-model="bid" ng-init="bid =75" /><span style="margin-left:10px;">${{bid}}</span </p>
                 <hr>
                 <label>Expression</label> <br>
                 <span> Expression written inside two curly braces : {{bid | currency:'&#8377;' }}</span><br>
@@ -48,7 +48,8 @@
                 <br>Customize filter for address : <input class="form-control" type="text" ng-model="model.addressFilter"
                   placeholder="Search users between 5-15 range..." />
                 <br> Angular filter
-                <input type="number" style="width:50%" ng-model="model.currencyValue" placeholder="Enter above four digit number">                {{model.currencyValue | userCurrency}}
+                <input type="number" style="width:50%" ng-model="model.currencyValue" placeholder="Enter a number">
+                {{model.currencyValue | userCurrency}}
               </div>
             </uib-accordion-group>
             <uib-accordion-group heading="Form" panel-class="panel panel-primary">
