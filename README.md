@@ -6,8 +6,8 @@ All you need to do is to clone this repository,
 
 
 ```
-git clone https://github.com/asitpanda1/userProfile
-cd userProfile
+git clone https://github.com/asitpanda/angular-App1
+cd angular-App1
 ```
 
 Then, install all the dependencies:
