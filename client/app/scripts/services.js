@@ -10,7 +10,14 @@ function userService($http) {
   var userServiceApi = {};
 
   userServiceApi.getUserList = function () {
-    return $http.get('api/user');
+     return $http.get('api/user');
+
+// return $http({
+//         method: 'jsonp', 
+//         url: 'api/user/?callback=JSON_CALLBACK',
+//         data: ''
+//       })
+
   }
 
   userServiceApi.getUserDetails = function (uId) {
